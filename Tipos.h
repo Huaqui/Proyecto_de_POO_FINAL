@@ -7,10 +7,9 @@
 
 #include <string>
 using namespace std;
-
 // Definiendo alias
 using TipoEntero = int;
 using TipoCaracter = char;
 using TipoString = string;
+#endif //GAME_TIPOS_H
 
-#endif

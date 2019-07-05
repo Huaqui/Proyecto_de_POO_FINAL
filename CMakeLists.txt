@@ -1,42 +1,22 @@
 cmake_minimum_required(VERSION 3.13)
-project(ProyectoFinalPOO)
+project(game)
 
-# Archivos del Projecto
-set(PROJECT_SOURCE
-        main.cpp
-        Tipos.h
-        Menu.cpp Menu.h
-        Tierra.cpp Tierra.h
-        Objeto.cpp Objeto.h
-    )
-
-# C++ Standard se sugiere 11 ó 14
 set(CMAKE_CXX_STANDARD 14)
 
-if (WIN32)
-    # Valido solo para WINDOWS en LINUX o OSX no debe de cambiarse
-    # Modificar al folder donde se encuentre la libreria SFML instalada en su PC
-    set(SFML_ROOT "C:/shared/SFML-2.5.1") # <--------- Modificar SOLO AQUI
+set(SFML_INCLUDE_DIR "SFML-2.5.1/include")
+set(SFML_LIBRARY_DIR "SFML-2.5.1/lib")
+set(SFML_DIR "SFML-2.5.1/lib/cmake/SFML")
 
-    set(SFML_INCLUDE_DIR "${SFML_ROOT}/include")
-    set(SFML_LIBRARY_DIR "${SFML_ROOT}/lib")
-    set(SFML_DIR "${SFML_ROOT}/lib/cmake/SFML")
-    link_directories(SFML_LIBRARY_DIR)
-    include_directories(SFML_INCLUDE_DIR)
+link_directories(SFML_LIBRARY_DIR)
+include_directories(SFML_INCLUDE_DIR)
+
+find_package(SFML 2.5.1 COMPONENTS system window graphics network audio)
+
+if(SFML_FOUND)
+    message(STATUS "SFML_INCLUDE_DIR: ${SFML_INCLUDE_DIR}")
+    message(STATUS "SFML_LIBRARIES: ${SFML_LIBRARIES}")
+    message(STATUS "SFML_VERSION: ${SFML_VERSION}")
 endif()
 
-# Instrucciones para generar el ejecutable
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE})
-
-find_package(SFML 2.5.1
-        COMPONENTS
-            system
-            window
-            graphics
-        REQUIRED)
-
-target_link_libraries (${PROJECT_NAME}
-        sfml-system
-        sfml-window
-        sfml-graphics
-        )
+add_executable(game game.cpp Tierra.cpp Tierra.h Objeto.cpp Objeto.h Tipos.h Menu.cpp Menu.h Museo.cpp Museo.h Restaurante.cpp Restaurante.h Hotel.cpp Hotel.h)
+target_link_libraries (game sfml-graphics sfml-window sfml-system)

@@ -1,39 +1,26 @@
-//
-// Created by utec on 21/06/19.
-//
+#ifndef GAME_MENU_H
+#define GAME_MENU_H
 
-#ifndef GAME_CONTROLADOR_H
-#define GAME_CONTROLADOR_H
-
-#include <limits>
-
+#include <iostream>
 #include "Tierra.h"
 #include "Tipos.h"
-
-using namespace std;
-
-template <typename T>
-T input(const string& label) {
-    T value;
-    cout << label;
-    cin >> value;
-    cin.clear();
-    cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-    return value;
-}
 
 class Menu {
     TipoEntero opcion;
     Tierra tierra;
-    void mostrarMenu();
+    static void mostrarMenu();
     void seleccionarOpcion();
     void agregarObjeto();
     void removerObjeto();
     void dibujarMapa();
+    void masCercano();
+    void tmejores();
+    void mejores();
 public:
-    Menu(int largo, int altura);
+    Menu(TipoEntero _ancho, TipoEntero _altura);
+    virtual ~Menu();
     void ejecutar();
 };
 
 
-#endif //GAME_CONTROLADOR_H
+#endif //GAME_MENU_H

@@ -1,28 +1,21 @@
-//
-// Created by utec on 21/06/19.
-//
-
 #include "Objeto.h"
-#include "Tierra.h"
 
+Objeto::Objeto(): nombre{}, color{}, posX{}, posY{},calificacion{}, figura{}{}
 
-Objeto::Objeto(): color{}, posX{}, posY{}  {}
-
-Objeto::Objeto(const TipoString& nombre, TipoCaracter color,
-               TipoEntero posX, TipoEntero posY):
+Objeto::Objeto(TipoString& nombre, TipoCaracter& color,
+               TipoEntero posX, TipoEntero posY, TipoEntero& calificacion,TipoCaracter& _figura):
         nombre{nombre}, color{color},
-        posX{posX}, posY{posY} {}
+        posX{posX}, posY{posY}, calificacion{calificacion}, figura{_figura} {}
 
-Objeto::~Objeto() {}
-
-void Objeto::setNombre(const TipoString& nombre) { this->nombre = nombre; }
-void Objeto::moverse(TipoEntero x, TipoEntero y) {} //--  por implementar
+Objeto::~Objeto() = default;
 
 TipoString   Objeto::getNombre() { return nombre; }
 TipoEntero   Objeto::getPosX()   { return posX; }
 TipoEntero   Objeto::getPosY()   { return posY; }
 TipoCaracter Objeto::getColor()  { return color; }
+TipoEntero  Objeto::getCalificacion() {return calificacion;}
+TipoCaracter Objeto::getFigura() { return figura;}
 
-TipoString Objeto::mostrarPosicion() {
-    return "X = " + to_string(posX) + " Y = " + to_string(posY);
+void Objeto::getDireccion() {
+    cout << "Direccion:  " << "X= " << getPosX() << " Y= " << getPosY() << endl;
 }
